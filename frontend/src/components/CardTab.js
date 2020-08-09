@@ -6,6 +6,7 @@ class CardTab extends Component {
 
     this.state = {
       hover: 'card shadow',
+      text: this.props.text ? this.props.text : 'By Vehicle',
     };
   }
 
@@ -33,7 +34,7 @@ class CardTab extends Component {
             marginRight: 30,
           }}
         >
-          <h2>By Vehicle</h2>
+          <h2>{this.state.text}</h2>
         </div>
       </div>
     );

@@ -13,10 +13,9 @@ class Dashboard extends Component {
           className="row"
           style={{ display: 'flex', justifyContent: 'center' }}
         >
-          <CardTab></CardTab>
-          <CardTab></CardTab>
-          <CardTab></CardTab>
-          <FormControl></FormControl>
+          <CardTab text="By Vehicle"></CardTab>
+          <CardTab text="By Tire Size"></CardTab>
+          <CardTab text="By Rim Size"></CardTab>
         </div>
       </div>
     );
