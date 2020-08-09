@@ -1,11 +1,16 @@
-import React from 'react';
+// Rendering layer control
 
-function App() {
-  return (
-    <div className="App">
-      <p>Tyre pressure Project is up and running</p>
-    </div>
-  );
+import React, { Component } from 'react';
+import Dashboard from './Dashboard';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="container">
+        <Dashboard />
+      </div>
+    );
+  }
 }
 
 export default App;
