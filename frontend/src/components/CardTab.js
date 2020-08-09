@@ -3,11 +3,28 @@ import React, { Component } from 'react';
 class CardTab extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      hover: 'card shadow',
+    };
   }
 
   render() {
     return (
-      <div className="card shadow" style={{ margin: 10 }}>
+      <div
+        className={this.state.hover}
+        style={{ margin: 10 }}
+        onMouseEnter={() => {
+          this.setState({
+            hover: 'card shadow-lg',
+          });
+        }}
+        onMouseLeave={() => {
+          this.setState({
+            hover: 'card shadow',
+          });
+        }}
+      >
         <div
           style={{
             marginTop: 30,

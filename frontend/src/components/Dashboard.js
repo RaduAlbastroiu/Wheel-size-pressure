@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CardTab from './CardTab';
+import FormControl from './FormControl';
 
 class Dashboard extends Component {
   render() {
@@ -15,6 +16,7 @@ class Dashboard extends Component {
           <CardTab></CardTab>
           <CardTab></CardTab>
           <CardTab></CardTab>
+          <FormControl></FormControl>
         </div>
       </div>
     );
