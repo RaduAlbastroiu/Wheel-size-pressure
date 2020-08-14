@@ -10,6 +10,10 @@ app.use(compression());
 app.use(cors());
 app.use(bp.json());
 
+// register api
+const api = require('./api');
+app.use('/api', api);
+
 // register file server
 const fileServer = require('./fileServer');
 app.use(fileServer);
