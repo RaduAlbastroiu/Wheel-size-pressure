@@ -11,7 +11,7 @@ makesRouter.get('/', async (req, res) => {
     return res.status(200).json(makes);
   } catch (err) {
     if (err === 'not found')
-      return res.status(404).send({ err: 'Trip not found' });
+      return res.status(404).send({ err: 'Make not found' });
     console.error(err);
     return res.status(500).send('Internal Server Error');
   }
