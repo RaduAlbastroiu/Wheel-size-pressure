@@ -7,8 +7,8 @@ const makesController = new MakesController();
 
 makesRouter.get('/', async (req, res) => {
   try {
-    const found = await makesController.find();
-    return res.status(200).json({ success: 'Query successful', make: make });
+    const makes = await makesController.find();
+    return res.status(200).json(makes);
   } catch (err) {
     if (err === 'not found')
       return res.status(404).send({ err: 'Trip not found' });
