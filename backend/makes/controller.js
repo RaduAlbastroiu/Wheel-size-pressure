@@ -5,9 +5,12 @@ const MakeModel = require('./model');
 class MakeController {
   async shouldUpdate() {
     let maker = await MakeModel.findOne({});
-    return (
-      parseInt(process.env.CACHE_MAKE_TIME, 10) < Date.now() - maker.lastSync
-    );
+    if (maker) {
+      return (
+        parseInt(process.env.CACHE_MAKE_TIME, 10) < Date.now() - maker.lastSync
+      );
+    }
+    return true;
   }
 
   async updateData(data) {

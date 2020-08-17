@@ -1,16 +1,12 @@
 const mongoose = require('mongoose');
 
 const modelSchema = mongoose.Schema({
-  slug: {
+  make: {
     type: String,
     required: true,
   },
-  name: {
-    type: String,
-    required: true,
-  },
-  name_en: {
-    type: String,
+  models: {
+    type: [String],
     required: true,
   },
   lastSync: {
