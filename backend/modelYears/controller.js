@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 const YearsModel = require('./model');
-const e = require('express');
 
 class ModelYearsController {
   async shouldUpdate(make, model) {
@@ -18,6 +17,7 @@ class ModelYearsController {
     try {
       let years = data.years;
       let yearsModel = await YearsModel.findOne({ make: make, model: model });
+
       if (!yearsModel) {
         let newYearsModel = new YearsModel({
           make: make,
@@ -68,7 +68,7 @@ class ModelYearsController {
         return await this.getDB(make, model);
       }
     } catch (err) {
-      console.log({ message: err.message, url: err.config.url });
+      console.log(err);
       throw 'not found';
     }
   }

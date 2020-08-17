@@ -12,7 +12,7 @@ modelsRouter.get('/', async (req, res) => {
     return res.status(200).json(models);
   } catch (err) {
     if (err === 'not found')
-      return res.status(404).send({ err: 'Make not found' });
+      return res.status(404).send({ err: 'Model not found' });
     console.error(err);
     return res.status(500).send('Internal Server Error');
   }

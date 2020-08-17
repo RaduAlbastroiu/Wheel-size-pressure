@@ -79,7 +79,7 @@ class ModelsController {
         return await this.getDB(make);
       }
     } catch (err) {
-      console.log({ message: err.message, url: err.config.url });
+      console.log(err);
       throw 'not found';
     }
   }
