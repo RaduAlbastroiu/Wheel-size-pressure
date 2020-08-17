@@ -12,13 +12,23 @@ class MakeController {
 
   async updateData(data) {
     data.forEach(async (maker) => {
-      let make = new MakeModel({
-        slug: maker.slug,
-        name: maker.name,
-        name_en: maker.name_en,
-        lastSync: Date.now(),
-      });
-      await make.save();
+      try {
+        let targetMaker = await MakeModel.findOne({ slug: maker.slug });
+        if (!targetMaker) {
+          let make = new MakeModel({
+            slug: maker.slug,
+            name: maker.name,
+            name_en: maker.name_en,
+            lastSync: Date.now(),
+          });
+          await make.save();
+        } else {
+          targetMaker.lastSync = Date.now();
+          await targetMaker.save();
+        }
+      } catch (err) {
+        console.log({ message: err.message });
+      }
     });
   }
 
