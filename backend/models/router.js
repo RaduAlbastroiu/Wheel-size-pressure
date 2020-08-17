@@ -18,20 +18,6 @@ modelsRouter.get('/', async (req, res) => {
   }
 });
 
-modelsRouter.get('/years', async (req, res) => {
-  try {
-    const make = req.query.make;
-    const model = req.query.model;
-    const years = await modelsController.findModelYears(make, model);
-    return res.status(200).json(years);
-  } catch (err) {
-    if (err === 'not found')
-      return res.status(404).send({ err: 'Model not found' });
-    console.error(err);
-    return res.status(500).send('Internal Server Error');
-  }
-});
-
 modelsRouter.get('/tire', async (req, res) => {
   try {
     const make = req.query.make;
