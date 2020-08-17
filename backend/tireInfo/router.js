@@ -5,7 +5,7 @@ const TireInfoController = require('./controller');
 const tireInfoRouter = new Router();
 const tireInfoController = new TireInfoController();
 
-tireInfoRouter.get('/tire', async (req, res) => {
+tireInfoRouter.get('/', async (req, res) => {
   try {
     const make = req.query.make;
     const model = req.query.model;

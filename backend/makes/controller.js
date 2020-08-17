@@ -6,8 +6,13 @@ class MakeController {
       'https://api.wheel-size.com/v1/makes/?user_key=' +
       process.env.WHEEL_FITMENT_KEY;
 
-    let res = await axios.get(url);
-    return res.data;
+    try {
+      let res = await axios.get(url);
+      return res.data;
+    } catch (err) {
+      console.log({ message: err.message, url: err.config.url });
+      throw 'not found';
+    }
   }
 }
 
