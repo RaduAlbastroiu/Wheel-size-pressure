@@ -1,13 +1,9 @@
 // setup environment variables
 require('dotenv').config();
+const connectDB = require('./db');
 
 // load database
-const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO, {
-  userNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-});
+connectDB();
 
 // spin up server
 const app = require('./backend/app');
