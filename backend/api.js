@@ -9,7 +9,10 @@ mainRouter.use('/makes', makesRoutes);
 const modelsRoutes = require('./models/router');
 mainRouter.use('/models', modelsRoutes);
 
-const modelYearsRoutes = require('./models/router');
+const modelYearsRoutes = require('./modelYears/router');
 mainRouter.use('/years', modelYearsRoutes);
+
+const tireInfoRoutes = require('./tireInfo/router');
+mainRouter.use('/tire', tireInfoRoutes);
 
 module.exports = mainRouter;

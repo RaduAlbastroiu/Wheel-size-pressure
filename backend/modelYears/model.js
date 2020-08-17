@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const modelSchema = mongoose.Schema({
+const yearsSchema = mongoose.Schema({
   years: {
     type: [Number],
     required: true,
@@ -11,5 +11,5 @@ const modelSchema = mongoose.Schema({
   },
 });
 
-const modelModel = mongoose.model('model', modelSchema);
-module.exports = modelModel;
+const yearsModel = mongoose.model('years', yearsSchema);
+module.exports = yearsModel;

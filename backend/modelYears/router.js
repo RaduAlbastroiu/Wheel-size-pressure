@@ -1,10 +1,9 @@
 const { Router } = require('express');
 
 const ModelYearsController = require('./controller');
-const modelsRouter = require('../models/router');
 
 const modelYearsRouter = new Router();
-const modelYearsController = new ModelYearController();
+const modelYearsController = new ModelYearsController();
 
 modelYearsRouter.get('/', async (req, res) => {
   try {
