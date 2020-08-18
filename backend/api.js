@@ -13,6 +13,9 @@ const modelYearsRoutes = require('./modelYears/router');
 mainRouter.use('/years', modelYearsRoutes);
 
 const tireInfoRoutes = require('./tireInfo/router');
-mainRouter.use('/tire', tireInfoRoutes);
+mainRouter.use('/tireinfo', tireInfoRoutes);
+
+const tireRoutes = require('./tires/router');
+mainRouter.use('/tire', tireRoutes);
 
 module.exports = mainRouter;
