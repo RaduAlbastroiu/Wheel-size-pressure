@@ -18,4 +18,7 @@ mainRouter.use('/tireinfo', tireInfoRoutes);
 const tireRoutes = require('./tires/router');
 mainRouter.use('/tire', tireRoutes);
 
+const carsTireRoutes = require('./carsfortire/router');
+mainRouter.use('/carstire', carsTireRoutes);
+
 module.exports = mainRouter;

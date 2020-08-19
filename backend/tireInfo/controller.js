@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 const TireInfoModel = require('./model');
-const { models } = require('mongoose');
 
 class TireInfoController {
   async shouldUpdate(make, model, year) {
@@ -12,7 +11,7 @@ class TireInfoController {
     });
     if (tireInfo) {
       return (
-        parseInt(process.env.CACHE_MAKE_TIME, 10) <
+        parseInt(process.env.CACHE_TIRE_INFO_TIME, 10) <
         Date.now() - tireInfo.lastSync
       );
     }

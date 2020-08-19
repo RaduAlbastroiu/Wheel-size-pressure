@@ -7,8 +7,9 @@ const carsTireController = new CarsTireController();
 
 carsTireRouter.get('/', async (req, res) => {
   try {
-    const makes = await carsTireController.find();
-    return res.status(200).json(makes);
+    const tire = req.query.tire;
+    const cars = await carsTireController.find(tire);
+    return res.status(200).json(cars);
   } catch (err) {
     if (err === 'not found')
       return res.status(404).send({ err: 'Make not found' });
