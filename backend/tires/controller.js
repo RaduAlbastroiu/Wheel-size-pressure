@@ -16,16 +16,16 @@ class TireController {
   async updateData(data) {
     data.forEach(async (tire) => {
       try {
-        let targetTire = await TireModel.findOne({ slug: tire.tire });
+        let targetTire = await TireModel.findOne({ tire: tire.tire });
         if (!targetTire) {
-          let tire = new TireModel({
+          let foundTire = new TireModel({
             tire: tire.tire,
             width: tire.width,
             aspect_ratio: tire.aspect_ratio,
             rim_diameter: tire.rim_diameter,
             lastSync: Date.now(),
           });
-          await tire.save();
+          await foundTire.save();
         } else {
           targetTire.lastSync = Date.now();
           await targetTire.save();

@@ -21,4 +21,7 @@ mainRouter.use('/tire', tireRoutes);
 const carsTireRoutes = require('./carsfortire/router');
 mainRouter.use('/carstire', carsTireRoutes);
 
+const boltPatternRoutes = require('./boltpattern/router');
+mainRouter.use('/boltpattern', boltPatternRoutes);
+
 module.exports = mainRouter;
