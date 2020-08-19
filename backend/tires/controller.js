@@ -23,6 +23,7 @@ class TireController {
             width: tire.width,
             aspect_ratio: tire.aspect_ratio,
             rim_diameter: tire.rim_diameter,
+            count: tire.count,
             lastSync: Date.now(),
           });
           await foundTire.save();
