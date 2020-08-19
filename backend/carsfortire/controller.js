@@ -10,7 +10,7 @@ class CarsTireController {
     if (cars) {
       return (
         parseInt(process.env.CACHE_CARS_TIRE_TIME, 10) <
-        Date.now() - tireInfo.lastSync
+        Date.now() - cars.lastSync
       );
     }
     return true;
@@ -64,7 +64,7 @@ class CarsTireController {
     return body;
   }
 
-  async findTireInfo(tire) {
+  async findCarsForTire(tire) {
     try {
       let shouldUpdate = await this.shouldUpdate(tire);
       if (shouldUpdate) {
