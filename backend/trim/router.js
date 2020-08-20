@@ -1,11 +1,11 @@
 const { Router } = require('express');
 
-const TireInfoController = require('./controller');
+const TrimController = require('./controller');
 
-const tireInfoRouter = new Router();
-const tireInfoController = new TireInfoController();
+const trimRouter = new Router();
+const trimController = new TrimController();
 
-tireInfoRouter.get('/', async (req, res) => {
+trimRouter.get('/', async (req, res) => {
   try {
     const make = req.query.make;
     const model = req.query.model;
@@ -14,10 +14,10 @@ tireInfoRouter.get('/', async (req, res) => {
     return res.status(200).json(tireInfo);
   } catch (err) {
     if (err === 'not found')
-      return res.status(404).send({ err: 'Tire info not found' });
+      return res.status(404).send({ err: 'Model not found' });
     console.error(err);
     return res.status(500).send('Internal Server Error');
   }
 });
 
-module.exports = tireInfoRouter;
+module.exports = trimRouter;
