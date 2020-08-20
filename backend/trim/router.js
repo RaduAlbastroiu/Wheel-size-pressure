@@ -10,11 +10,11 @@ trimRouter.get('/', async (req, res) => {
     const make = req.query.make;
     const model = req.query.model;
     const year = req.query.year;
-    const tireInfo = await tireInfoController.findTireInfo(make, model, year);
-    return res.status(200).json(tireInfo);
+    const trim = await trimController.findTireInfo(make, model, year);
+    return res.status(200).json(trim);
   } catch (err) {
     if (err === 'not found')
-      return res.status(404).send({ err: 'Model not found' });
+      return res.status(404).send({ err: 'Trim not found' });
     console.error(err);
     return res.status(500).send('Internal Server Error');
   }
