@@ -10,7 +10,7 @@ trimRouter.get('/', async (req, res) => {
     const make = req.query.make;
     const model = req.query.model;
     const year = req.query.year;
-    const trim = await trimController.findTireInfo(make, model, year);
+    const trim = await trimController.findTrim(make, model, year);
     return res.status(200).json(trim);
   } catch (err) {
     if (err === 'not found')

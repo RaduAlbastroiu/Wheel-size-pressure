@@ -18,35 +18,34 @@ class TrimController {
   }
 
   async updateData(data, make, model, year) {
-    try {
-      let slug = data.slug;
-      let name = data.name;
-      let trimModel = await TrimModel.findOne({
-        make: make,
-        model: model,
-        year: year,
-        slug: slug,
-      });
-
-      if (!trimModel) {
-        let newTrimModel = new TrimModel({
+    data.forEach(async (trim) => {
+      try {
+        let targetTrim = await TrimModel.findOne({
           make: make,
           model: model,
           year: year,
-          slug: slug,
-          name: name,
-          lastSync: Date.now(),
+          slug: trim.slug,
         });
-        await newTrimModel.save();
-      } else {
-        trimModel.slug = tires;
-        trimModel.name = rims;
-        trimModel.lastSync = Date.now();
-        await trimModel.save();
+        if (!targetTrim) {
+          let newTrim = new TrimModel({
+            make,
+            model,
+            year,
+            slug: trim.slug,
+            name: trim.name,
+            lastSync: Date.now(),
+          });
+          await newTrim.save();
+        } else {
+          targetTrim.slug = trim.slug;
+          targetTrim.name = trim.name;
+          targetTrim.lastSync = Date.now();
+          await targetTrim.save();
+        }
+      } catch (err) {
+        console.log({ message: err.message });
       }
-    } catch (err) {
-      console.log({ message: err.message });
-    }
+    });
   }
 
   async getApi(make, model, year) {
@@ -64,25 +63,31 @@ class TrimController {
       });
 
       await this.updateData(res.data, make, model, year);
-      return { slug: res.data.slug, name: res.data.name };
+      let result = [];
+      res.data.forEach((trim) => {
+        result.push({ slug: trim.slug, name: trim.name });
+      });
+      return result;
     } catch (err) {
-      console.log({ message: err.message, url: err.config.url });
+      console.log({ message: err.message });
       throw 'not found';
     }
   }
 
   async getDB(make, model, year) {
-    let res = await Trim.findOne({
-      make: make,
-      model: model,
-      year: year,
-    });
-    let tires = JSON.parse(res.tires);
-    let rims = JSON.parse(res.rims);
-    return { tires, rims };
+    let res = await TrimModel.find(
+      {
+        make: make,
+        model: model,
+        year: year,
+      },
+      { _id: 0, slug: 1, name: 1 }
+    );
+
+    return res;
   }
 
-  async findTireInfo(make, model, year) {
+  async findTrim(make, model, year) {
     try {
       let shouldUpdate = await this.shouldUpdate(make, model, year);
       if (shouldUpdate) {

@@ -27,4 +27,7 @@ mainRouter.use('/boltpattern', boltPatternRoutes);
 const carsBoltPatternRoutes = require('./carsforboltpattern/router');
 mainRouter.use('/carsboltpattern', carsBoltPatternRoutes);
 
+const trimRoutes = require('./trim/router');
+mainRouter.use('/trim', trimRoutes);
+
 module.exports = mainRouter;
