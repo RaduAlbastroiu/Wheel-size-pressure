@@ -30,4 +30,7 @@ mainRouter.use('/carsboltpattern', carsBoltPatternRoutes);
 const trimRoutes = require('./trim/router');
 mainRouter.use('/trim', trimRoutes);
 
+const wheelsRouter = require('./wheels/router');
+mainRouter.use('/wheels', wheelsRouter);
+
 module.exports = mainRouter;
