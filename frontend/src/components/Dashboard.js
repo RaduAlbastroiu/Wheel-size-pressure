@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import MainCard from './MainCard';
 
 class Dashboard extends Component {
   render() {
     return (
-      <div className="col-md-8 offset-md-2">
-        <h2 style={{ marginTop: 40, marginBottom: 40, textAlign: 'center' }}>
-          Tyre pressure finder
-        </h2>
+      <div className="col-md-10 offset-md-1" style={{ marginTop: 40 }}>
+        <MainCard></MainCard>
       </div>
     );
   }
