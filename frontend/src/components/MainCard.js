@@ -4,9 +4,16 @@ class MainCard extends Component {
   render() {
     return (
       <div className="card">
-        <h2 style={{ marginTop: 40, marginBottom: 40, textAlign: 'center' }}>
-          Tyre pressure finder
-        </h2>
+        <div class="row" style={{ height: 150 }}>
+          <div
+            class="col-sm-6 col-md-4"
+            style={{ border: '2px solid red' }}
+          ></div>
+          <div
+            class="col-sm-6 col-md-8"
+            style={{ border: '2px solid blue' }}
+          ></div>
+        </div>
       </div>
     );
   }
