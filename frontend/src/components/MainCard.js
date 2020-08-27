@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
+import LeftPane from './LeftPane';
 
 class MainCard extends Component {
   render() {
     return (
       <div className="card">
-        <div class="row" style={{ height: 150 }}>
-          <div
-            class="col-sm-6 col-md-4"
-            style={{ border: '2px solid red' }}
-          ></div>
-          <div
-            class="col-sm-6 col-md-8"
-            style={{ border: '2px solid blue' }}
-          ></div>
+        <div class="row" style={{ height: 550 }}>
+          <div class="col-sm-6 col-md-4" style={{ backgroundColor: '#0275d8' }}>
+            <LeftPane></LeftPane>
+          </div>
+          <div class="col-sm-6 col-md-8"></div>
         </div>
       </div>
     );
