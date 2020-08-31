@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import FormGroup from './FormGroup';
 
 class RightPane extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      querryValues: [],
+      stages: [
+        { label: 'Choose car maker', type: 'Maker' },
+        { label: 'Choose model', type: 'Model' },
+        { label: 'Choose year', type: 'Year' },
+        { label: 'Choose trim option', type: 'Trim' },
+      ],
+    };
+  }
+
   renderNext() {
     console.log('next clicked');
   }
