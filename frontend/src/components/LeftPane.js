@@ -4,7 +4,7 @@ import tire from '../resources/tire.png';
 class LeftPane extends Component {
   render() {
     return (
-      <div>
+      <div style={{ border: '2px solid red' }}>
         <div
           style={{
             display: 'flex',
