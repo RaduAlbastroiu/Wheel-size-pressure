@@ -7,7 +7,7 @@ class RightPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      querryValues: ['bmw', '3-series', '2004', '320d-420c52'],
+      querryValues: [],
       stages: [
         {
           label: 'Choose car maker',
