@@ -11,13 +11,25 @@ class FormGroup extends Component {
   renderOptions = () => {
     let d = [];
     this.props.data.forEach((element) => {
-      d.push(<option key={element.name}>{element.name}</option>);
+      d.push(<option key={element.key}>{element.value}</option>);
     });
     return d;
   };
 
   onChange = (event) => {
     this.setState({ formValue: event.target.value });
+  };
+
+  onClick = () => {
+    let res = this.props.data.find(
+      (element) => element.value === this.state.formValue
+    );
+    console.log(typeof this.props.data[0].value);
+    console.log(typeof this.state.formValue);
+    console.log(this.state.formValue);
+    console.log(this.props.data);
+    console.log(res);
+    this.props.onNext(res.key);
   };
 
   renderForm = () => {
@@ -64,9 +76,7 @@ class FormGroup extends Component {
           <button
             className="btn btn-primary"
             style={{ margin: 10 }}
-            onClick={() => {
-              this.props.onNext(this.state.formValue);
-            }}
+            onClick={this.onClick}
             disabled={!this.props.nextDisabled}
           >
             Next

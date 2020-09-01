@@ -54,11 +54,27 @@ class RightPane extends Component {
             params: params,
           }
         );
-        console.log(res);
-        this.setState({ data: res.data });
+        this.prepareData(res.data);
       } catch (err) {
         console.log(err);
       }
+    }
+  };
+
+  prepareData = (data) => {
+    if (
+      this.state.querryValues.length <= 1 ||
+      this.state.querryValues.length === 4
+    ) {
+      let newData = data.map((element) => {
+        return { key: element.slug, value: element.name };
+      });
+      this.setState({ data: newData });
+    } else {
+      let newData = data.map((element) => {
+        return { key: element.toString(), value: element.toString() };
+      });
+      this.setState({ data: newData });
     }
   };
 
@@ -79,6 +95,7 @@ class RightPane extends Component {
   };
 
   onNext = async (val) => {
+    console.log(val);
     this.setState(
       {
         querryValues: [...this.state.querryValues, val],
@@ -86,7 +103,6 @@ class RightPane extends Component {
       },
       () => {
         console.log('next clicked');
-        console.log(val);
         this.fetchData();
       }
     );
