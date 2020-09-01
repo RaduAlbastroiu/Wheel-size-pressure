@@ -18,7 +18,6 @@ class FormGroup extends Component {
   };
 
   onChange = (event) => {
-    console.log(event.target.value);
     let disabled = true;
     if (
       event.target.value !== 'Maker' &&

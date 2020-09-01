@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FormGroup from './FormGroup';
+import Wheels from './Wheels';
 
 class RightPane extends Component {
   constructor(props) {
@@ -46,24 +47,22 @@ class RightPane extends Component {
   }
 
   fetchData = async () => {
-    if (this.state.querryValues.length <= 4) {
-      let params = {};
-      for (let i = 0; i < this.state.querryValues.length; i++) {
-        params[this.state.stages[i].param] = this.state.querryValues[i];
-      }
+    let params = {};
+    for (let i = 0; i < this.state.querryValues.length; i++) {
+      params[this.state.stages[i].param] = this.state.querryValues[i];
+    }
 
-      try {
-        const res = await axios.get(
-          this.state.stages[this.state.querryValues.length].endpoint,
-          {
-            params: params,
-          }
-        );
-        console.log(res.data);
-        this.prepareData(res.data);
-      } catch (err) {
-        console.log(err);
-      }
+    try {
+      const res = await axios.get(
+        this.state.stages[this.state.querryValues.length].endpoint,
+        {
+          params: params,
+        }
+      );
+      console.log(res.data);
+      this.prepareData(res.data);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -94,21 +93,18 @@ class RightPane extends Component {
         nextDisabled: true,
       },
       () => {
-        console.log('prev clicked');
         this.fetchData();
       }
     );
   };
 
   onNext = async (val) => {
-    console.log(val);
     this.setState(
       {
         querryValues: [...this.state.querryValues, val],
         nextDisabled: true,
       },
       () => {
-        console.log('next clicked');
         this.fetchData();
       }
     );
@@ -133,6 +129,7 @@ class RightPane extends Component {
           <h3>{this.state.querryValues[1]}</h3>
           <h3>{this.state.querryValues[2]}</h3>
           <h3>{this.state.querryValues[3]}</h3>
+          <Wheels data={this.state.data}></Wheels>
         </div>
       );
     }
