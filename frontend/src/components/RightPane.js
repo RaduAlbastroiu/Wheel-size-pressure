@@ -15,14 +15,14 @@ class RightPane extends Component {
     };
   }
 
-  onPrev() {
+  onPrev = () => {
     console.log('prev clicked');
-  }
+  };
 
-  onNext(val) {
+  onNext = (val) => {
     console.log('next clicked');
     console.log(val);
-  }
+  };
 
   render() {
     return (

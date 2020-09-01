@@ -8,19 +8,19 @@ class FormGroup extends Component {
     };
   }
 
-  renderOptions() {
+  renderOptions = () => {
     let d = [];
     this.props.data.forEach((element) => {
       d.push(<option key={element}>{element}</option>);
     });
     return d;
-  }
+  };
 
   onChange = (event) => {
     this.setState({ formValue: event.target.value });
   };
 
-  renderForm() {
+  renderForm = () => {
     return (
       <div className="form-group" style={{ marginTop: 20 }}>
         <select
@@ -34,7 +34,7 @@ class FormGroup extends Component {
         </select>
       </div>
     );
-  }
+  };
 
   render() {
     return (
