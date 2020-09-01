@@ -39,7 +39,6 @@ class RightPane extends Component {
           endpoint: '/api/wheels',
         },
       ],
-      nextDisabled: true,
       data: [],
     };
 
@@ -124,7 +123,7 @@ class RightPane extends Component {
           data={this.state.data}
           onNext={this.onNext}
           onPrev={this.onPrev}
-          nextDisabled={this.state.nextDisabled}
+          showPrev={this.state.querryValues.length > 0}
         ></FormGroup>
       );
     } else {

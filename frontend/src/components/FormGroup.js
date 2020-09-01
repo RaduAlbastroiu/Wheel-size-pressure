@@ -5,6 +5,7 @@ class FormGroup extends Component {
     super(props);
     this.state = {
       formValue: '',
+      nextDisabled: true,
     };
   }
 
@@ -17,18 +18,24 @@ class FormGroup extends Component {
   };
 
   onChange = (event) => {
-    this.setState({ formValue: event.target.value });
+    console.log(event.target.value);
+    let disabled = true;
+    if (
+      event.target.value !== 'Maker' &&
+      event.target.value !== 'Model' &&
+      event.target.value !== 'Year' &&
+      event.target.value !== 'Trim'
+    ) {
+      disabled = false;
+    }
+    this.setState({ formValue: event.target.value, nextDisabled: disabled });
   };
 
   onClick = () => {
     let res = this.props.data.find(
       (element) => element.value === this.state.formValue
     );
-    console.log(typeof this.props.data[0].value);
-    console.log(typeof this.state.formValue);
-    console.log(this.state.formValue);
-    console.log(this.props.data);
-    console.log(res);
+    this.setState({ nextDisabled: true });
     this.props.onNext(res.key);
   };
 
@@ -45,6 +52,32 @@ class FormGroup extends Component {
           {this.renderOptions()}
         </select>
       </div>
+    );
+  };
+
+  renderNext = () => {
+    return (
+      <button
+        className="btn btn-primary"
+        style={{ margin: 10 }}
+        onClick={this.onClick}
+        disabled={this.state.nextDisabled}
+      >
+        Next
+      </button>
+    );
+  };
+
+  renderPrev = () => {
+    return (
+      <button
+        className="btn btn-outline-primary"
+        style={{ margin: 10 }}
+        onClick={this.props.onPrev}
+        disabled={!this.props.showPrev}
+      >
+        Prev
+      </button>
     );
   };
 
@@ -66,21 +99,8 @@ class FormGroup extends Component {
           <div>{this.renderForm()}</div>
         </div>
         <div>
-          <button
-            className="btn btn-outline-primary"
-            style={{ margin: 10 }}
-            onClick={this.props.onPrev}
-          >
-            Prev
-          </button>
-          <button
-            className="btn btn-primary"
-            style={{ margin: 10 }}
-            onClick={this.onClick}
-            disabled={!this.props.nextDisabled}
-          >
-            Next
-          </button>
+          {this.renderPrev()}
+          {this.renderNext()}
         </div>
       </div>
     );
