@@ -15,26 +15,24 @@ class RightPane extends Component {
     };
   }
 
-  renderNext() {
-    console.log('next clicked');
-  }
-
-  renderPrev() {
+  onPrev() {
     console.log('prev clicked');
   }
 
-  onChange(event) {
-    console.log(event.target.value);
+  onNext(val) {
+    console.log('next clicked');
+    console.log(val);
   }
 
   render() {
     return (
       <div style={{}}>
         <FormGroup
-          label="Chose car maker"
-          type="Make"
+          label={this.state.stages[this.state.querryValues.length].label}
+          type={this.state.stages[this.state.querryValues.length].type}
           data={['Bmw', 'Audi', 'Mercedes-Benz']}
-          onChange={this.onChange}
+          onNext={this.onNext}
+          onPrev={this.onPrev}
         ></FormGroup>
       </div>
     );

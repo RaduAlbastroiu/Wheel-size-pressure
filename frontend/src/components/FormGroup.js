@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 
-class Manufacturer extends Component {
+class FormGroup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formValue: '',
+    };
+  }
+
   renderOptions() {
     let d = [];
     this.props.data.forEach((element) => {
@@ -9,6 +16,10 @@ class Manufacturer extends Component {
     return d;
   }
 
+  onChange = (event) => {
+    this.setState({ formValue: event.target.value });
+  };
+
   renderForm() {
     return (
       <div className="form-group" style={{ marginTop: 20 }}>
@@ -16,7 +27,7 @@ class Manufacturer extends Component {
           className="form-control"
           id={this.props.type}
           style={{ width: 250 }}
-          onChange={this.props.onChange}
+          onChange={this.onChange}
         >
           <option>{this.props.type}</option>
           {this.renderOptions()}
@@ -42,9 +53,28 @@ class Manufacturer extends Component {
         <div style={{ border: '2px solid blue' }}>
           <div>{this.renderForm()}</div>
         </div>
+        <div>
+          <button
+            className="btn btn-outline-primary"
+            style={{ margin: 10 }}
+            onClick={this.props.onPrev}
+          >
+            Prev
+          </button>
+          <button
+            className="btn btn-primary"
+            style={{ margin: 10 }}
+            onClick={() => {
+              this.props.onNext(this.state.formValue);
+            }}
+            disabled={!this.state.formValue}
+          >
+            Next
+          </button>
+        </div>
       </div>
     );
   }
 }
 
-export default Manufacturer;
+export default FormGroup;
