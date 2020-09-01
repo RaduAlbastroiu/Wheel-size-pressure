@@ -4,7 +4,10 @@ import MainCard from './MainCard';
 class Dashboard extends Component {
   render() {
     return (
-      <div className="col-md-10 offset-md-1" style={{ marginTop: 40 }}>
+      <div
+        className="col-md-10 offset-md-1"
+        style={{ marginTop: 40, marginBottom: 100 }}
+      >
         <MainCard></MainCard>
       </div>
     );

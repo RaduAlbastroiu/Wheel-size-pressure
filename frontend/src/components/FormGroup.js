@@ -88,16 +88,29 @@ class FormGroup extends Component {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: 40,
-            border: '2px solid green',
+            marginTop: 60,
           }}
         >
           <h2>{this.props.label}</h2>
         </div>
-        <div style={{ border: '2px solid blue' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: 20,
+          }}
+        >
           <div>{this.renderForm()}</div>
         </div>
-        <div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 50,
+          }}
+        >
           {this.renderPrev()}
           {this.renderNext()}
         </div>

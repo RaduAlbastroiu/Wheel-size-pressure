@@ -7,7 +7,7 @@ class RightPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      querryValues: [],
+      querryValues: ['bmw', '3-series', '2004', '320d-420c52'],
       stages: [
         {
           label: 'Choose car maker',
@@ -59,8 +59,12 @@ class RightPane extends Component {
           params: params,
         }
       );
-      console.log(res.data);
-      this.prepareData(res.data);
+      if (this.state.querryValues.length < 4) {
+        this.prepareData(res.data);
+      } else {
+        console.log(res.data);
+        this.setState({ data: res.data });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -81,6 +85,18 @@ class RightPane extends Component {
       });
       this.setState({ data: newData });
     }
+  };
+
+  onBackToMaker = async () => {
+    this.setState(
+      {
+        querryValues: [],
+        nextDisabled: true,
+      },
+      () => {
+        this.fetchData();
+      }
+    );
   };
 
   onPrev = async () => {
@@ -125,11 +141,11 @@ class RightPane extends Component {
     } else {
       return (
         <div>
-          <h3>{this.state.querryValues[0]}</h3>
-          <h3>{this.state.querryValues[1]}</h3>
-          <h3>{this.state.querryValues[2]}</h3>
-          <h3>{this.state.querryValues[3]}</h3>
-          <Wheels data={this.state.data}></Wheels>
+          <Wheels
+            data={this.state.data}
+            onPrev={this.onPrev}
+            onBackToMaker={this.onBackToMaker}
+          ></Wheels>
         </div>
       );
     }

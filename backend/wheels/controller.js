@@ -78,7 +78,7 @@ class WheelsController {
       { _id: 0, wheels: 1 }
     );
 
-    let result = { wheels: JSON.parse(res[0].wheels) };
+    let result = JSON.parse(res[0].wheels);
     return result;
   }
 

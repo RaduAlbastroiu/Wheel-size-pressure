@@ -4,7 +4,7 @@ import tire from '../resources/tire.png';
 class LeftPane extends Component {
   render() {
     return (
-      <div style={{ border: '2px solid red' }}>
+      <div style={{ borderRadius: 10 }}>
         <div
           style={{
             display: 'flex',
@@ -39,6 +39,7 @@ class LeftPane extends Component {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            marginBottom: 40,
           }}
         >
           <p style={{ color: 'white' }}>Find tire pressure for your car.</p>
