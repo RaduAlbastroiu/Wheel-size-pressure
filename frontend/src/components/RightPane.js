@@ -32,6 +32,12 @@ class RightPane extends Component {
           param: 'trim',
           endpoint: '/api/trim',
         },
+        {
+          label: 'Wheels',
+          type: 'Wheel',
+          param: 'wheels',
+          endpoint: '/api/wheels',
+        },
       ],
       nextDisabled: true,
       data: [],
@@ -54,6 +60,7 @@ class RightPane extends Component {
             params: params,
           }
         );
+        console.log(res.data);
         this.prepareData(res.data);
       } catch (err) {
         console.log(err);
@@ -64,7 +71,7 @@ class RightPane extends Component {
   prepareData = (data) => {
     if (
       this.state.querryValues.length <= 1 ||
-      this.state.querryValues.length === 4
+      this.state.querryValues.length === 3
     ) {
       let newData = data.map((element) => {
         return { key: element.slug, value: element.name };
