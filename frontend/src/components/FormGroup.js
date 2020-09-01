@@ -11,7 +11,7 @@ class FormGroup extends Component {
   renderOptions = () => {
     let d = [];
     this.props.data.forEach((element) => {
-      d.push(<option key={element}>{element}</option>);
+      d.push(<option key={element.name}>{element.name}</option>);
     });
     return d;
   };
@@ -67,7 +67,7 @@ class FormGroup extends Component {
             onClick={() => {
               this.props.onNext(this.state.formValue);
             }}
-            disabled={!this.state.formValue}
+            disabled={!this.props.nextDisabled}
           >
             Next
           </button>
