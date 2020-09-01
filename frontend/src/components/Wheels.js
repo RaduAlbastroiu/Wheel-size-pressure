@@ -1,6 +1,27 @@
 import React, { Component } from 'react';
 
 class Wheels extends Component {
+  renderPressure = (pressure) => {
+    if (pressure) {
+      return (
+        <div>
+          <p>
+            Pressure:
+            {pressure.bar} bar
+          </p>
+          <p>
+            Pressure:
+            {pressure.psi} psi
+          </p>
+          <p>
+            Pressure:
+            {pressure.kPa} kPa
+          </p>
+        </div>
+      );
+    }
+  };
+
   renderTireData = (tireData) => {
     return (
       <div>
@@ -11,9 +32,7 @@ class Wheels extends Component {
         <p>Rim Diameter: R{tireData.rim_diameter}</p>
         <p>Rim Width: {tireData.rim_width}</p>
         <p>Rim Offset: {tireData.rim_offset}</p>
-        <p>Pressure: {tireData.tire_pressure.bar} bar</p>
-        <p>Pressure: {tireData.tire_pressure.psi} psi</p>
-        <p>Pressure: {tireData.tire_pressure.kPa} kPa</p>
+        {this.renderPressure(tireData.tire_pressure)}
       </div>
     );
   };
