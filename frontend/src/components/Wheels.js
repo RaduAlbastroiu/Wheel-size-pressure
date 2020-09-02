@@ -71,7 +71,7 @@ class Wheels extends Component {
         </div>
         <div className="card-body">
           <h4 className="card-title">
-            Rear Tire {front.tire_width}/{front.tire_aspect_ratio}/R
+            Rear Tire {rear.tire_width}/{rear.tire_aspect_ratio}/R
             {front.rim_diameter}
           </h4>
           {this.renderTireData(rear)}
