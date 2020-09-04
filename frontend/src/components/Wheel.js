@@ -77,24 +77,6 @@ class Wheel extends Component {
     );
   };
 
-  renderFront = (front) => {
-    return (
-      <div
-        className="card shadow"
-        style={{ margin: 20, borderRadius: 10, padding: 10 }}
-        key={Math.floor(Math.random() * 10000)}
-      >
-        <div className="card-body">
-          <h4 className="card-title">
-            Tire {front.tire_width}/{front.tire_aspect_ratio}/R
-            {front.rim_diameter}
-          </h4>
-          {this.renderTireData(front)}
-        </div>
-      </div>
-    );
-  };
-
   renderFrontAndRear = (front, rear) => {
     return (
       <div
