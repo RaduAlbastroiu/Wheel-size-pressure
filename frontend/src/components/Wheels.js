@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 
 class Wheels extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showDetails: 'none',
+      showDetailsText: 'Show more tire details',
+    };
+  }
+
   renderPressure = (pressure) => {
     if (pressure) {
       return (
         <div>
           <p>Pressure: {pressure.bar} bar</p>
-          <p>Pressure: {pressure.psi} psi</p>
-          <p>Pressure: {pressure.kPa} kPa</p>
         </div>
       );
     }
@@ -16,14 +22,37 @@ class Wheels extends Component {
   renderTireData = (tireData) => {
     return (
       <div>
-        <p>Width: {tireData.tire_width}</p>
-        <p>Aspect Ratio: {tireData.tire_aspect_ratio}</p>
-        <p>Load index: {tireData.load_index}</p>
-        <p>Speed index: {tireData.speed_index}</p>
-        <p>Rim Diameter: R{tireData.rim_diameter}</p>
-        <p>Rim Width: {tireData.rim_width}</p>
-        <p>Rim Offset: {tireData.rim_offset}</p>
         {this.renderPressure(tireData.tire_pressure)}
+
+        <button
+          class="btn btn-outline-primary"
+          style={{ marginBottom: 10 }}
+          onClick={() => {
+            if (this.state.showDetails === 'none') {
+              this.setState({
+                showDetails: '',
+                showDetailsText: 'Hide tire details',
+              });
+            } else {
+              this.setState({
+                showDetails: 'none',
+                showDetailsText: 'Show more tire details',
+              });
+            }
+          }}
+        >
+          {this.state.showDetailsText}
+        </button>
+
+        <div class="card card-body" style={{ display: this.state.showDetails }}>
+          <p>Width: {tireData.tire_width}</p>
+          <p>Aspect Ratio: {tireData.tire_aspect_ratio}</p>
+          <p>Load index: {tireData.load_index}</p>
+          <p>Speed index: {tireData.speed_index}</p>
+          <p>Rim Diameter: R{tireData.rim_diameter}</p>
+          <p>Rim Width: {tireData.rim_width}</p>
+          <p>Rim Offset: {tireData.rim_offset}</p>
+        </div>
       </div>
     );
   };
