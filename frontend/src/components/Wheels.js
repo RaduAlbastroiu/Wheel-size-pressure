@@ -5,18 +5,9 @@ class Wheels extends Component {
     if (pressure) {
       return (
         <div>
-          <p>
-            Pressure:
-            {pressure.bar} bar
-          </p>
-          <p>
-            Pressure:
-            {pressure.psi} psi
-          </p>
-          <p>
-            Pressure:
-            {pressure.kPa} kPa
-          </p>
+          <p>Pressure: {pressure.bar} bar</p>
+          <p>Pressure: {pressure.psi} psi</p>
+          <p>Pressure: {pressure.kPa} kPa</p>
         </div>
       );
     }
