@@ -62,7 +62,17 @@ class RightPane extends Component {
       if (this.state.querryValues.length < 4) {
         this.prepareData(res.data);
       } else {
-        console.log(res.data);
+        res.data.sort((a, b) => {
+          if (a.front && a.front.tire && b.front && b.front.tire) {
+            if (a.front.tire < b.front.tire) {
+              return -1;
+            }
+            if (a.front.tire > b.front.tire) {
+              return 1;
+            }
+          }
+          return 0;
+        });
         this.setState({ data: res.data });
       }
     } catch (err) {
@@ -71,6 +81,7 @@ class RightPane extends Component {
   };
 
   prepareData = (data) => {
+    console.log(data);
     if (
       this.state.querryValues.length <= 1 ||
       this.state.querryValues.length === 3
@@ -78,11 +89,27 @@ class RightPane extends Component {
       let newData = data.map((element) => {
         return { key: element.slug, value: element.name };
       });
+      newData.sort((a, b) => {
+        if (a.value < b.value) {
+          return -1;
+        }
+        if (a.balue > b.value) {
+          return 1;
+        }
+        return 0;
+      });
       this.setState({ data: newData });
     } else {
       let newData = data.map((element) => {
         return { key: element.toString(), value: element.toString() };
       });
+      if (this.state.querryValues.length === 3) {
+        console.log(newData);
+        /*
+        
+        console.log(newData);
+        */
+      }
       this.setState({ data: newData });
     }
   };
