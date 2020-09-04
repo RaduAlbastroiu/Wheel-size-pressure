@@ -26,9 +26,37 @@ class Wheel extends Component {
       <div>
         {this.renderPressure(tireData.tire_pressure)}
 
+        <div
+          className="card card-body"
+          style={{ display: this.state.showDetails }}
+        >
+          <p>Width: {tireData.tire_width}</p>
+          <p>Aspect Ratio: {tireData.tire_aspect_ratio}</p>
+          <p>Load index: {tireData.load_index}</p>
+          <p>Speed index: {tireData.speed_index}</p>
+          <p>Rim Diameter: R{tireData.rim_diameter}</p>
+          <p>Rim Width: {tireData.rim_width}</p>
+          <p>Rim Offset: {tireData.rim_offset}</p>
+        </div>
+      </div>
+    );
+  };
+
+  renderShowMoreButton = () => {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: 10,
+        }}
+      >
         <button
           className="btn btn-outline-primary"
-          style={{ marginBottom: 10 }}
+          style={{
+            width: 200,
+          }}
           onClick={() => {
             if (this.state.showDetails === 'none') {
               this.setState({
@@ -45,19 +73,6 @@ class Wheel extends Component {
         >
           {this.state.showDetailsText}
         </button>
-
-        <div
-          className="card card-body"
-          style={{ display: this.state.showDetails }}
-        >
-          <p>Width: {tireData.tire_width}</p>
-          <p>Aspect Ratio: {tireData.tire_aspect_ratio}</p>
-          <p>Load index: {tireData.load_index}</p>
-          <p>Speed index: {tireData.speed_index}</p>
-          <p>Rim Diameter: R{tireData.rim_diameter}</p>
-          <p>Rim Width: {tireData.rim_width}</p>
-          <p>Rim Offset: {tireData.rim_offset}</p>
-        </div>
       </div>
     );
   };
@@ -87,20 +102,23 @@ class Wheel extends Component {
         style={{ margin: 20, borderRadius: 10, padding: 10 }}
         key={Math.floor(Math.random() * 10000)}
       >
-        <div className="card-body">
-          <h4 className="card-title">
-            Front Tire {front.tire_width}/{front.tire_aspect_ratio}/R
-            {front.rim_diameter}
-          </h4>
-          {this.renderTireData(front)}
+        <div className="row card-body">
+          <div className="card-body">
+            <h4 className="card-title">
+              Front Tire {front.tire_width}/{front.tire_aspect_ratio}/R
+              {front.rim_diameter}
+            </h4>
+            {this.renderTireData(front)}
+          </div>
+          <div className="card-body">
+            <h4 className="card-title">
+              Rear Tire {rear.tire_width}/{rear.tire_aspect_ratio}/R
+              {front.rim_diameter}
+            </h4>
+            {this.renderTireData(rear)}
+          </div>
         </div>
-        <div className="card-body">
-          <h4 className="card-title">
-            Rear Tire {rear.tire_width}/{rear.tire_aspect_ratio}/R
-            {front.rim_diameter}
-          </h4>
-          {this.renderTireData(rear)}
-        </div>
+        {this.renderShowMoreButton()}
       </div>
     );
   };
@@ -109,7 +127,7 @@ class Wheel extends Component {
     if (this.props.rear.tire) {
       return this.renderFrontAndRear(this.props.front, this.props.rear);
     } else {
-      return this.renderFront(this.props.front);
+      return this.renderFrontAndRear(this.props.front, this.props.front);
     }
   };
 

@@ -8,12 +8,12 @@ class MainCard extends Component {
       <div className="card" style={{ borderRadius: 15 }}>
         <div className="row" style={{}}>
           <div
-            className="col-sm-6 col-md-4"
+            className="col-sm-4 col-lg-3"
             style={{ backgroundColor: '#0275d8', borderRadius: 15 }}
           >
             <LeftPane></LeftPane>
           </div>
-          <div className="col-sm-6 col-md-8">
+          <div className="col-sm-8 col-lg-9">
             <RightPane></RightPane>
           </div>
         </div>

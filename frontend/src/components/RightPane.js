@@ -7,7 +7,7 @@ class RightPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      querryValues: ['bmw', '3-series', '2004', '320d-420c52'],
+      querryValues: [],
       stages: [
         {
           label: 'Choose car maker',
@@ -81,7 +81,6 @@ class RightPane extends Component {
   };
 
   prepareData = (data) => {
-    console.log(data);
     if (
       this.state.querryValues.length <= 1 ||
       this.state.querryValues.length === 3
@@ -103,13 +102,7 @@ class RightPane extends Component {
       let newData = data.map((element) => {
         return { key: element.toString(), value: element.toString() };
       });
-      if (this.state.querryValues.length === 3) {
-        console.log(newData);
-        /*
-        
-        console.log(newData);
-        */
-      }
+      newData.sort();
       this.setState({ data: newData });
     }
   };

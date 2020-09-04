@@ -42,7 +42,9 @@ class LeftPane extends Component {
             marginBottom: 40,
           }}
         >
-          <p style={{ color: 'white' }}>Find tire pressure for your car.</p>
+          <p className="text-center" style={{ color: 'white' }}>
+            Find tire pressure for your car.
+          </p>
         </div>
       </div>
     );
