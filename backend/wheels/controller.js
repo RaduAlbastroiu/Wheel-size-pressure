@@ -20,27 +20,34 @@ class WheelsController {
   }
 
   async updateData(data, make, model, year, trim) {
-    try {
-      let wheels = JSON.stringify(data[0].wheels);
+    if (process.env.CACHE_WHEELS_TIME > 0) {
+      try {
+        let wheels = JSON.stringify(data[0].wheels);
 
-      let targetWheels = await WheelsModel.findOne({ make, model, year, trim });
-      if (!targetWheels) {
-        let newWheelsModel = new WheelsModel({
+        let targetWheels = await WheelsModel.findOne({
           make,
           model,
           year,
           trim,
-          wheels,
-          lastSync: Date.now(),
         });
-        await newWheelsModel.save();
-      } else {
-        targetWheels.lastSync = Date.now();
-        targetWheels.wheels = wheels;
-        await targetWheels.save();
+        if (!targetWheels) {
+          let newWheelsModel = new WheelsModel({
+            make,
+            model,
+            year,
+            trim,
+            wheels,
+            lastSync: Date.now(),
+          });
+          await newWheelsModel.save();
+        } else {
+          targetWheels.lastSync = Date.now();
+          targetWheels.wheels = wheels;
+          await targetWheels.save();
+        }
+      } catch (err) {
+        console.log({ message: err.message });
       }
-    } catch (err) {
-      console.log({ message: err.message });
     }
   }
 

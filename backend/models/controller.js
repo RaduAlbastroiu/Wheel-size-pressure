@@ -11,7 +11,7 @@ class ModelsController {
         Date.now() - makerModels.lastSync
       );
     }
-    return process.env.CACHE_MODEL_YEAR_TIME > 0;
+    return true;
   }
 
   async updateData(data, make) {

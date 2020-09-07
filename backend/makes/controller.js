@@ -10,7 +10,7 @@ class MakeController {
         parseInt(process.env.CACHE_MAKE_TIME, 10) < Date.now() - maker.lastSync
       );
     }
-    return process.env.CACHE_MAKE_TIME > 0;
+    return true;
   }
 
   async updateData(data) {

@@ -15,38 +15,40 @@ class TrimController {
       );
     }
 
-    return process.env.CACHE_TRIM_TIME > 0;
+    return true;
   }
 
   async updateData(data, make, model, year) {
-    data.forEach(async (trim) => {
-      try {
-        let targetTrim = await TrimModel.findOne({
-          make: make,
-          model: model,
-          year: year,
-          slug: trim.slug,
-        });
-        if (!targetTrim) {
-          let newTrim = new TrimModel({
-            make,
-            model,
-            year,
+    if (process.env.CACHE_TRIM_TIME > 0) {
+      data.forEach(async (trim) => {
+        try {
+          let targetTrim = await TrimModel.findOne({
+            make: make,
+            model: model,
+            year: year,
             slug: trim.slug,
-            name: trim.name,
-            lastSync: Date.now(),
           });
-          await newTrim.save();
-        } else {
-          targetTrim.slug = trim.slug;
-          targetTrim.name = trim.name;
-          targetTrim.lastSync = Date.now();
-          await targetTrim.save();
+          if (!targetTrim) {
+            let newTrim = new TrimModel({
+              make,
+              model,
+              year,
+              slug: trim.slug,
+              name: trim.name,
+              lastSync: Date.now(),
+            });
+            await newTrim.save();
+          } else {
+            targetTrim.slug = trim.slug;
+            targetTrim.name = trim.name;
+            targetTrim.lastSync = Date.now();
+            await targetTrim.save();
+          }
+        } catch (err) {
+          console.log({ message: err.message });
         }
-      } catch (err) {
-        console.log({ message: err.message });
-      }
-    });
+      });
+    }
   }
 
   async getApi(make, model, year) {

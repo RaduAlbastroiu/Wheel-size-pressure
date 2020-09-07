@@ -15,37 +15,39 @@ class TireInfoController {
         Date.now() - tireInfo.lastSync
       );
     }
-    return process.env.CACHE_TIRE_INFO_TIME > 0;
+    return true;
   }
 
   async updateData(data, make, model, year) {
-    try {
-      let tires = JSON.stringify(data.tires);
-      let rims = JSON.stringify(data.rims);
-      let tireInfoModel = await TireInfoModel.findOne({
-        make: make,
-        model: model,
-        year: year,
-      });
-
-      if (!tireInfoModel) {
-        let newTireInfoModel = new TireInfoModel({
+    if (process.env.CACHE_TIRE_INFO_TIME > 0) {
+      try {
+        let tires = JSON.stringify(data.tires);
+        let rims = JSON.stringify(data.rims);
+        let tireInfoModel = await TireInfoModel.findOne({
           make: make,
           model: model,
           year: year,
-          tires: tires,
-          rims: rims,
-          lastSync: Date.now(),
         });
-        await newTireInfoModel.save();
-      } else {
-        tireInfoModel.tires = tires;
-        tireInfoModel.rims = rims;
-        tireInfoModel.lastSync = Date.now();
-        await tireInfoModel.save();
+
+        if (!tireInfoModel) {
+          let newTireInfoModel = new TireInfoModel({
+            make: make,
+            model: model,
+            year: year,
+            tires: tires,
+            rims: rims,
+            lastSync: Date.now(),
+          });
+          await newTireInfoModel.save();
+        } else {
+          tireInfoModel.tires = tires;
+          tireInfoModel.rims = rims;
+          tireInfoModel.lastSync = Date.now();
+          await tireInfoModel.save();
+        }
+      } catch (err) {
+        console.log({ message: err.message });
       }
-    } catch (err) {
-      console.log({ message: err.message });
     }
   }
 

@@ -10,31 +10,33 @@ class TireController {
         parseInt(process.env.CACHE_TIRE_TIME, 10) < Date.now() - tire.lastSync
       );
     }
-    return process.env.CACHE_TIRE_TIME > 0;
+    return true;
   }
 
   async updateData(data) {
-    data.forEach(async (tire) => {
-      try {
-        let targetTire = await TireModel.findOne({ tire: tire.tire });
-        if (!targetTire) {
-          let foundTire = new TireModel({
-            tire: tire.tire,
-            width: tire.width,
-            aspect_ratio: tire.aspect_ratio,
-            rim_diameter: tire.rim_diameter,
-            count: tire.count,
-            lastSync: Date.now(),
-          });
-          await foundTire.save();
-        } else {
-          targetTire.lastSync = Date.now();
-          await targetTire.save();
+    if (process.env.CACHE_TIRE_TIME > 0) {
+      data.forEach(async (tire) => {
+        try {
+          let targetTire = await TireModel.findOne({ tire: tire.tire });
+          if (!targetTire) {
+            let foundTire = new TireModel({
+              tire: tire.tire,
+              width: tire.width,
+              aspect_ratio: tire.aspect_ratio,
+              rim_diameter: tire.rim_diameter,
+              count: tire.count,
+              lastSync: Date.now(),
+            });
+            await foundTire.save();
+          } else {
+            targetTire.lastSync = Date.now();
+            await targetTire.save();
+          }
+        } catch (err) {
+          console.log({ message: err.message });
         }
-      } catch (err) {
-        console.log({ message: err.message });
-      }
-    });
+      });
+    }
   }
 
   async getApi() {
