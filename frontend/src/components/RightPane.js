@@ -97,7 +97,19 @@ class RightPane extends Component {
         }
         return 0;
       });
-      this.setState({ data: newData });
+
+      // filter duplicate values
+      let filteredData = newData.filter((value, index, self) => {
+        let keep = true;
+        for (let i = 0; i <= index; i++) {
+          if (value.value === newData[i].value && index != i) {
+            keep = false;
+          }
+        }
+        return keep;
+      });
+
+      this.setState({ data: filteredData });
     } else {
       let newData = data.map((element) => {
         return { key: element.toString(), value: element.toString() };

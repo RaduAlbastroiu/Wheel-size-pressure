@@ -18,6 +18,12 @@ class Wheel extends Component {
           </p>
         </div>
       );
+    } else {
+      return (
+        <div>
+          <p>Pressure: No Data</p>
+        </div>
+      );
     }
   };
 
@@ -107,17 +113,7 @@ class Wheel extends Component {
 
   renderCard = () => {
     if (this.props.rear.tire) {
-      if (this.props.rear.pressure) {
-        return this.renderFrontAndRear(this.props.front, this.props.rear);
-      } else {
-        let rear = this.props.rear;
-        rear.tire_pressure = {
-          bar: 0,
-          psi: 0,
-          kPa: 0,
-        };
-        return this.renderFrontAndRear(this.props.front, this.props.rear);
-      }
+      return this.renderFrontAndRear(this.props.front, this.props.rear);
     } else {
       return this.renderFrontAndRear(this.props.front, this.props.front);
     }
