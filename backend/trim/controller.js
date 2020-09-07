@@ -14,7 +14,8 @@ class TrimController {
         parseInt(process.env.CACHE_TRIM_TIME, 10) < Date.now() - trim.lastSync
       );
     }
-    return true;
+
+    return process.env.CACHE_TRIM_TIME > 0;
   }
 
   async updateData(data, make, model, year) {

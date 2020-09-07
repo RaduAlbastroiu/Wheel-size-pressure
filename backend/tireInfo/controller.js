@@ -15,7 +15,7 @@ class TireInfoController {
         Date.now() - tireInfo.lastSync
       );
     }
-    return true;
+    return process.env.CACHE_TIRE_INFO_TIME > 0;
   }
 
   async updateData(data, make, model, year) {

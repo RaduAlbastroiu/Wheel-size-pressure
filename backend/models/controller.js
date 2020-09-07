@@ -7,11 +7,11 @@ class ModelsController {
     let makerModels = await ModelModel.findOne({ make: make });
     if (makerModels) {
       return (
-        parseInt(process.env.CACHE_MAKE_TIME, 10) <
+        parseInt(process.env.CACHE_MODEL_YEAR_TIME, 10) <
         Date.now() - makerModels.lastSync
       );
     }
-    return true;
+    return process.env.CACHE_MODEL_YEAR_TIME > 0;
   }
 
   async updateData(data, make) {

@@ -10,7 +10,7 @@ class TireController {
         parseInt(process.env.CACHE_TIRE_TIME, 10) < Date.now() - tire.lastSync
       );
     }
-    return true;
+    return process.env.CACHE_TIRE_TIME > 0;
   }
 
   async updateData(data) {
